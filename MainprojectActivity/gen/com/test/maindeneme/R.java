@@ -42,10 +42,10 @@ public final class R {
         public static final int imageView13=0x7f050016;
         public static final int imageView2=0x7f050001;
         public static final int imageView3=0x7f050002;
-        public static final int imageView4=0x7f050004;
+        public static final int imageView4=0x7f050006;
         public static final int imageView5=0x7f050003;
-        public static final int imageView6=0x7f050005;
-        public static final int imageView7=0x7f050006;
+        public static final int imageView6=0x7f050004;
+        public static final int imageView7=0x7f050005;
         public static final int imageView8=0x7f050007;
         public static final int imageView9=0x7f050008;
         public static final int textView1=0x7f05000b;
