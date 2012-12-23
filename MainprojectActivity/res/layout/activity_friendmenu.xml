@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/friendPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/my_profile"
+        android:foregroundGravity="top"
+        android:src="@drawable/com_facebook_profile_picture_blank_square" />
+
+    <TextView
+        android:id="@+id/friendName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/friendPicture"
+		  android:layout_marginTop="20dp"        
+        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/name" />
+
+    <TextView
+        android:id="@+id/birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/friendName"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/birthdate" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/birthdate"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/gender" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gender"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="7dp"
+        android:text="@string/location" />
+
+    <Button
+        android:id="@+id/message"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/location"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:onClick="toMessage"
+        android:text="@string/messages" />
+
+    <Button
+        android:id="@+id/friendPost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message"
+        android:gravity="center"
+        android:onClick="toPost"
+        android:text="@string/show_post" />
+    <Button
+        android:id="@+id/back"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/friendPost"
+        android:gravity="center"
+        android:onClick="toBack"
+        android:text="@string/back" />
+
+</RelativeLayout>

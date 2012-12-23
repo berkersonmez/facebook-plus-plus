@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+	  <ImageView
+	     android:src="@drawable/com_facebook_profile_picture_blank_square"
+	     android:id="@+id/profilePicture"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/my_profile"
+        android:foregroundGravity="top" />
+    <TextView
+        android:id="@id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/username"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        />
+	  <TextView 
+	     android:id="@+id/name"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="10dp"
+	     android:layout_margin="10dp"
+	     android:layout_below="@id/profilePicture"
+	     android:text="@string/name"
+	     />
+	 	<TextView 
+	     android:id="@+id/birthdate"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="10dp"
+	     android:layout_margin="10dp"
+	     android:layout_below="@id/name"
+	     android:text="@string/birthdate"
+	     />
+	 	<TextView 
+	 	  android:id="@+id/gender"
+	 	  android:layout_width="wrap_content"
+	 	  android:layout_height="wrap_content"
+	 	  android:layout_marginLeft="10dp"
+	 	  android:layout_margin="10dp"
+	 	  android:layout_below="@id/birthdate"
+	     android:text="@string/gender"
+	 	    />
+	 	<TextView 
+	 	  android:id="@+id/location"
+	 	  android:layout_width="wrap_content"
+	     android:layout_below="@id/gender"
+	     android:layout_margin="10dp"
+	     android:layout_marginLeft="7dp"
+	 	  android:layout_height="wrap_content"
+	     android:text="@string/location"
+	 	    />		
+	 	 <Button 
+	 	  android:id="@+id/EditProfile"
+	 	  android:layout_width="wrap_content"
+	 	  android:layout_height="wrap_content"
+	 	  android:gravity="center"
+	 	  android:layout_margin="40dp"
+	 	  android:layout_alignParentBottom="true"
+		  android:layout_toRightOf="@+id/menu"
+	 	  android:text="@string/edit_profile"
+	 	  android:onClick="toEdit"
+	 	     />
+	 	 <Button 
+	 	  android:id="@id/menu"
+	 	  android:layout_width="wrap_content"
+	 	  android:layout_height="wrap_content"
+	 	  android:gravity="center"
+	 	  android:text="@string/menu"
+	 	  android:layout_margin="40dp"
+	 	  android:layout_alignParentBottom="true"
+	 	  android:onClick="toMenu"
+	 	     /> 
+	 	  
+    
+</RelativeLayout>
