@@ -98,6 +98,7 @@ public class FriendsListActivity extends ListActivity {
 		Intent intent = new Intent(getContext(),friendMenu.class);
 		intent.putExtra("ID",friendsList.get(position).getId());
 		intent.putExtra("NAME", friendsList.get(position).getName());
+		intent.putExtra("POSITION", position);
 		startActivity(intent);
 		
 	}

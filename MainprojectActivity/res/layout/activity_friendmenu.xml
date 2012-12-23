@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/my_profile"
         android:foregroundGravity="top"
         android:src="@drawable/com_facebook_profile_picture_blank_square" />
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/friendPicture"
 		  android:layout_marginTop="20dp"        
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:layout_marginLeft="10dp"
         android:text="@string/name" />
 
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/friendName"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:layout_marginLeft="10dp"
         android:text="@string/birthdate" />
 
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/birthdate"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:layout_marginLeft="10dp"
         android:text="@string/gender" />
 
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gender"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:layout_marginLeft="7dp"
         android:text="@string/location" />
 
@@ -55,7 +55,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/location"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:onClick="toMessage"
         android:text="@string/messages" />

@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
         	facebook.setAccessToken(access_token);
         if(expires != 0)
         	facebook.setAccessExpires(expires);
-        if(facebook.isSessionValid()){
+        if(facebook.isSessionValid() && access_token!=null){
         	getSocialApplication().setFacebook(facebook);
         	Intent intent = new Intent(getContext(),mainMenu.class);
         	startActivity(intent);
@@ -47,10 +47,7 @@ public class MainActivity extends Activity {
 	
 	@SuppressWarnings("deprecation")
 	public void login(View view){
-		facebook.authorize(this,new String[]{"email","user_status","user_photos",
-				"user_about_me","user_birthday","user_location","friends_about_me",
-				"friends_location","friends_status","friends_birthday"
-		}, new DialogListener() {
+		facebook.authorize(this,getSocialApplication().getPermissions(), new DialogListener() {
             @Override
             public void onComplete(Bundle values) {
             	SharedPreferences.Editor editor = pref.edit();

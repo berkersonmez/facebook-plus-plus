@@ -42,10 +42,21 @@
             
         </activity>
         <activity
+            android:name=".GroupsListActivity" 
+            android:label="@string/title_activity_main">
+            
+        </activity>
+        <activity
             android:name=".friendMenu" 
             android:label="@string/title_activity_main">
             
         </activity>
+        <activity
+            android:name=".FriendPostActivity" 
+            android:label="@string/title_activity_main">
+            
+        </activity>
+        
     </application>
 
 </manifest>

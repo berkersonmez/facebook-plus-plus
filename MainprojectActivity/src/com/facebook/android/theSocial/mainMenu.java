@@ -1,9 +1,13 @@
 package com.facebook.android.theSocial;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import com.facebook.android.AsyncFacebookRunner;
+import com.facebook.android.AsyncFacebookRunner.RequestListener;
 import com.facebook.android.Facebook;
+import com.facebook.android.FacebookError;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +25,7 @@ public class mainMenu extends Activity {
 	Button profile;
 	Button post;
 	Button logout;
+	Button group;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,9 +41,14 @@ public class mainMenu extends Activity {
 		profile = (Button)findViewById(R.id.profile);
 		post = (Button)findViewById(R.id.post);
 		logout = (Button)findViewById(R.id.logout);
+		group = (Button)findViewById(R.id.groups);
 	}
 	public Context getcontext(){
 		return this;
+	}
+	public void toGroupList(View view){
+		Intent intent = new Intent(this,GroupsListActivity.class);
+		startActivity(intent);
 	}
 	public void toFriendsList(View view){
 		Intent intent = new Intent(this,FriendsListActivity.class);
@@ -56,16 +66,42 @@ public class mainMenu extends Activity {
     	editor.putString("access_token", null);
     	editor.putLong("access_expires",0);
     	editor.commit();
-		try {
-			facebook.logout(getcontext());
-			finish();
-		} catch (MalformedURLException e) {
-			Toast.makeText(getApplicationContext(), 
-                    "Connection failure. Please try again.", Toast.LENGTH_LONG).show();
-		} catch (IOException e) {
-			Toast.makeText(getApplicationContext(), 
-                    "Connection failure. Please try again.", Toast.LENGTH_LONG).show();
-		}
+    	if(facebook.isSessionValid()){
+    		AsyncFacebookRunner runner = new AsyncFacebookRunner(facebook);
+    		runner.logout(getcontext(), new RequestListener() {
+				
+				@Override
+				public void onMalformedURLException(MalformedURLException e, Object state) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onIOException(IOException e, Object state) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onFileNotFoundException(FileNotFoundException e, Object state) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onFacebookError(FacebookError e, Object state) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onComplete(String response, Object state) {
+					finish();
+				}
+			});
+    	}
+    	
+		
     }
 		
 	

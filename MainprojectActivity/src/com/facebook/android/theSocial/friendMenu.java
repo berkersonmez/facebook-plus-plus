@@ -4,13 +4,19 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
+import com.facebook.android.Facebook.DialogListener;
+import com.facebook.android.FacebookError;
 import com.facebook.android.theSocial.Friends.Friend;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -19,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class friendMenu extends Activity {
 	
@@ -30,9 +37,11 @@ public class friendMenu extends Activity {
 	private Button post;
 	private Button message;
 	private Button back;
-	JSONObject me;
+	JSONObject me = null;
+	JSONArray dataArray = null;
 	Facebook facebook;
 	private Friend friend;
+	private int position;
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +53,10 @@ public class friendMenu extends Activity {
 		setContentView(R.layout.activity_friendmenu);
 		facebook = getTheSocialApplication().getFacebook();
 		try {
-			me = new JSONObject(facebook.request(friend.getId()+"?fields=locations,birthday,gender"));
+			Bundle bdle=new Bundle();
+		    bdle.putString("fields","birthday,gender,location"); 
+			me = new JSONObject(facebook.request("me/friends",bdle));
+			dataArray = me.getJSONArray("data");
 		} catch (MalformedURLException e) {
 			Log.d("Error", e.getMessage());
 		} catch (JSONException e) {
@@ -52,6 +64,8 @@ public class friendMenu extends Activity {
 		} catch (IOException e) {
 			Log.d("Error",e.getMessage());
 		}
+		setUpViews();
+		setUpAbout();
 	}
 	public Friend getExtras(){
 		Bundle extra = getIntent().getExtras();
@@ -60,6 +74,7 @@ public class friendMenu extends Activity {
 		else{
 			String name = extra.getString("NAME");
 			String id = extra.getString("ID");
+			position = extra.getInt("POSITION");
 			return new Friend(name,id,null);
 		}
 	}
@@ -77,7 +92,7 @@ public class friendMenu extends Activity {
 	public void setUpAbout(){
 		URL imagevalue = null;
 		try {
-			imagevalue = new URL("http://graph.facebook.com/"+friend.getId()+"/picture?type=large");
+			imagevalue = new URL("http://graph.facebook.com/"+friend.getId()+"/picture?type=normal");
 		} catch (MalformedURLException e) {
 			Log.d("Error", e.getMessage());
 		}
@@ -90,13 +105,16 @@ public class friendMenu extends Activity {
 		photo.setImageBitmap(profilePic);
 		friendName.setText(friend.getName());
 		try {
-			gender.setText(me.getString("gender"));
-			birthdate.setText(me.getString("birthday"));
-			location.setText("Location: "+me.getString("location").split("\"")[7]);
+			gender.setText("Gender: "+dataArray.getJSONObject(position).getString("gender"));
+			birthdate.setText("Birthday: "+dataArray.getJSONObject(position).getString("birthday"));
+			location.setText("Location: "+dataArray.getJSONObject(position).getString("location").split("\"")[7]);
 		} catch (JSONException e) {
 			Log.d("Error", "Gender or location not found for this friends !!!"+e.getMessage());
 		}
 		
+	}
+	public Context getContext(){
+		return this;
 	}
 	public theSocialApplication getTheSocialApplication(){
 		theSocialApplication app = (theSocialApplication)getApplication();
@@ -106,10 +124,35 @@ public class friendMenu extends Activity {
 		finish();
 	}
 	public void toPost(View view){
-		
+		Intent intent = new Intent(friendMenu.this,FriendPostActivity.class);
+		intent.putExtra("ID", friend.getId());
+		startActivity(intent);
 	}
+	@SuppressWarnings("deprecation")
 	public void toMessage(View view){
 		
+		facebook.dialog(getContext(), "send", new DialogListener() {
+			
+			@Override
+			public void onFacebookError(FacebookError e) {
+				Toast.makeText(getApplicationContext(), "Message can not be sent", Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public void onError(DialogError e) {
+				Toast.makeText(getApplicationContext(), "Message can not be sent", Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public void onComplete(Bundle values) {
+				Toast.makeText(getApplicationContext(), "Message is sent", Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public void onCancel() {
+				
+			}
+		});
 	}
 	
 }

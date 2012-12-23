@@ -13,6 +13,17 @@
         android:layout_height="wrap_content"
         android:onClick="toFriendsList"
         />
+     <Button 
+        android:id="@+id/groups"
+        android:text="@string/group_list"
+        android:gravity="center"
+        android:layout_below="@+id/post"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@id/friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toGroupList"
+        />
     <Button 
         android:id="@id/profile"
         android:text="@string/my_profile"
@@ -25,7 +36,7 @@
         />
    
       <Button 
-        android:id="@+id/post"
+        android:id="@id/post"
         android:text="@string/post_to_wall"
         android:gravity="center"
         android:layout_margin="10dp"
